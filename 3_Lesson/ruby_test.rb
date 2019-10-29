@@ -1,4 +1,15 @@
+require 'in_html'
+
 class Pet
+  attr_accessor :name
+  attr_accessor :kind_of_animal
+  attr_accessor :hungry
+  attr_accessor :sleep
+  attr_accessor :sleep_indicator
+  attr_accessor :mood
+  attr_accessor :toilet
+  attr_accessor :hygiene_indicator
+  attr_accessor :life
 
   def initialize (name, kind_of_animal)
     @name = name
@@ -101,7 +112,15 @@ class Pet
 
   def timer_emulation
 
+    @hungry_emoji = ""
+    @toilet_emoji = ""
+    @sleep_emoji = ""
+    @mood_emoji = ""
+    @hygiene_emoji = ""
+    @life_emoji = ""
+
     if @hungry < 10
+      @hungry_emoji = "🤗"
       @hungry += 1
     else
       @life -= 1
@@ -109,14 +128,17 @@ class Pet
       @hungry = 0
       if @life == 0
         puts "Молодець, тебе з'їв(ла) #{@kind_of_animal}"
+        @hungry_emoji = "💀"
         exit
       end
     end
     if @toilet < 10
       @toilet += 1
+      @toilet_emoji = "😌"
     end
     if @toilet >= 6
       puts "Зводіть #{@name}(a) в туалет."
+      @toilet_emoji = "😰"
     end
     if @toilet >= 10
       #puts "#{@name} образився(лась) і втік(втекла)"
@@ -127,10 +149,12 @@ class Pet
     end
     if hungry_pet?
       puts "Погодуйте #{@name}(а)!"
+      @hungry_emoji = "🤤"
     end
 
     if @sleep_indicator > 7
       puts "#{@name} хоче спати."
+      @sleep_emoji = "😩"
     end
 
     if @sleep_indicator <= 10
@@ -139,18 +163,21 @@ class Pet
 
     if @hygiene_indicator <10
       @hygiene_indicator += 1
+      @hygiene_emoji = "🤗"
     else
       @life -= 1
       puts "У тебе залишилось #{@life} життя"
       @hygiene_indicator = 0
       if @life == 0
         puts "Молодець, треба було допомагати купатись #{@kind_of_animal}(у)"
+        @hygiene_emoji = "💀"
         exit
       end
     end
 
     if @hygiene_indicator > 7
       puts "#{@name} хоче прийняти ванну."
+      @hygiene_emoji = "😪"
     end
 
     if @hygiene_indicator >10
@@ -159,18 +186,30 @@ class Pet
 
     if @mood > 0
       @mood = @mood -1
+      @mood_emoji = "🙃"
     else
       @life -= 1
       puts "У тебе залишилось #{@life} життя"
       @mood = 0
       if @life == 0
         puts "Молодець, від тебе втік(ла) #{@kind_of_animal}"
+        @mood_emoji = "💀"
         exit
       end
     end
     if @mood < 4
       puts "#{@name} хоче пограться"
+      @mood_emoji = "😵"
     end
+
+    bypass_html = true
+    content = "<div>Indicator of eat: #{@hungry}</div> #{@hungry_emoji}
+    <div>Indicator of toilet: #{@toilet}</div> #{@toilet_emoji}
+    <div>Indicator of sleep: #{@sleep_indicator}</div> #{@sleep_emoji}
+    <div>Indicator of mood: #{@mood}</div> #{@mood_emoji}
+    <div>Indicator of hygiene: #{@hygiene_indicator}</div> #{@hygiene_emoji}
+    <div>Lifes: #{@life}</div> #{@life_emoji}"
+    In_HTML.input_in_html content, bypass_html
   end
 end
 
@@ -185,7 +224,7 @@ when 2
 when 3
   kind_of_animal = "Хом'як"
 end
-
+fl = true
 puts "Введіть ім'я майбутньої тваринки: "
 pet_name = gets.chomp
 pet = Pet.new pet_name, kind_of_animal
@@ -201,7 +240,7 @@ puts "6. Статистика"
 puts "7. Help."
 puts "8. Exit."
 puts ''
-while x !=8 do
+while x !=9 do
   x = gets.to_i
   case x
   when 1

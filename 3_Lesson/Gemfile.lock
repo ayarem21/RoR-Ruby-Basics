@@ -1,0 +1,17 @@
+GIT
+  remote: https://github.com/ayarem21/In_HTML
+  revision: 657680bf788d43ed1098035e5b75210ec90c1c98
+  specs:
+    in_html (0.0.1)
+
+GEM
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  in_html!
+
+BUNDLED WITH
+   1.16.2
