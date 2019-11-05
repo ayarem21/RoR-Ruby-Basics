@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Game</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    #container {
+      display: flex;
+    }
+    button {
+      width: 25vh;
+    }
+      div {
+        width: 25vh;
+      }
+  </style>
+</head>
+<div id="container">
+  <div id="fist_child">
+    <form class="form-group" method="post" action="/game/play/get_food">
+      <button class="btn btn-success" name="get_food">Get food</button>
+    </form>
+    <br>
+    <form class="form-group" method="post" action="/game/play/go_toilet">
+      <button class="btn btn-success" name="go_toilet">Go toilet</button>
+    </form>
+    <br>
+    <form class="form-group" method="post" action="/game/play/go_sleep">
+      <button class="btn btn-success" name="sleeping">Go sleep</button>
+    </form>
+    <br>
+    <form class="form-group" method="post" action="/game/play/go_to_wash">
+      <button class="btn btn-success" name="go_to_wash">Go to wash</button>
+    </form>
+    <br>
+    <form class="form-group" method="post" action="/game/play/play_with_animal">
+      <button class="btn btn-success" name="go_to_wash">Play with animal</button>
+    </form>
+  </div>
+  <div id="second_child">
+
+    <div class="form-group">Hungry indicator: <%= @hungry_stat %></div>
+    <div class="form-group">Toilet indicator: <%= @toilet_stat %></div>
+    <div class="form-group">Sleep indicator: <%= @sleep_stat %></div>
+    <div class="form-group">Wash indicator: <%= @wash_stat %></div>
+    <div class="form-group">Mood: <%= @mood_stat %></div>
+    <div class="form-group">Lifes: <%= @lifes_stat %></div>
+    <div class="form-group"><%= @dont_want %></div>
+    <br>
+    <div> <%= @str_stat_want %></div>
+    <div> <%= @life_left %></div>
+    <form method="get" action="/">
+      <button class="btn btn-warning">Delete</button>
+    </form>
+  </div>
+</div>
+</html>
